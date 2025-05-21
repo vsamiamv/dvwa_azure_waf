@@ -14,6 +14,7 @@ This project provides scripts to deploy DVWA (Damn Vulnerable Web Application) a
 1. **Customize Variables (Optional):**
    - Open `deploy_dvwa.ps1` and `deploy_agw.ps1`.
    - Edit the variable values at the top of each script to match your Azure environment and preferences.
+   - The username and password for DVWA are the defaults if you change them in the "dvwa-cloud-init.txt" file you will need to ssh to the machine and update the  /var/www/html/dvwa/config/config.inc.php file.
 
 2. **Run the Deployment Scripts:**
    - Open a PowerShell terminal.
