@@ -1,6 +1,6 @@
 # DVWA Azure Deployment
 
-This project provides scripts to deploy DVWA (Damn Vulnerable Web Application) an Application Gateway and a WAF POlicy on Azure using PowerShell and Azure CLI.
+This project provides scripts to deploy DVWA (Damn Vulnerable Web Application) an Application Gateway and a WAF Policy on Azure using PowerShell and Azure CLI.
 
 ## Prerequisites
 
