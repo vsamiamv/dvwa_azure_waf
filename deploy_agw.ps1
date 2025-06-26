@@ -11,6 +11,8 @@ $wafPolicy = "dvwa-waf-policy"
 $workspace = "waf-logs-workspace"
 $diagnostic_logs = "diagnostic_logs"
 
+az login
+
 # create a public IP for the application gateway
 az network application-gateway create `
     --resource-group $resourceGroup `
