@@ -17,7 +17,7 @@ az network application-gateway create `
     --name $applicationGatewayName `
     --location $location `
     --sku $agwsku `
-    --capacity 2 `
+    --capacity 1 `
     --vnet-name $vnet `
     --subnet $subnetAGW `
     --public-ip-address $agwPublicIP `
