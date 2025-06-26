@@ -8,15 +8,12 @@ $subnetVM = "subnet-vm"
 $subnetAGW = "subnet-agw"
 $nsg = "dvwa-nsg"
 $agwPublicIP = "dvwa-agw-pip"
-$agwsku = "WAF_v2"
 $publicIpSku = "Standard"
 $publicIpAllocationMethod = "Static"
 $applicationGatewayName = "dvwa-agw"
 $wafPolicy = "dvwa-waf-policy"
-$workspace = "waf-logs-v1"
+$workspace = "waf-logs-v4"
 $customDataFile = "dvwa-cloud-init.txt"
-$diagnostic_logs = "diagnostic_logs.json"
-$agwsku = "WAF_v2"
 
 # LOGIN
 az login
@@ -108,7 +105,8 @@ az network vnet subnet update `
   --name $subnetAGW `
   --network-security-group $nsg
 
+
 # OUTPUT FINAL PUBLIC IP
 # =============================
 $agwIP = az network public-ip show --resource-group $resourceGroup --name $agwPublicIP --query "ipAddress" -o tsv
-Write-Host "DVWA will be accicible after running the agw_deploy.ps1 script at: http://$agwIP/dvwa/setup.php"
+Write-Host "DVWA will be accessible after running the agw_deploy.ps1 script at: http://$agwIP/dvwa/setup.php"
