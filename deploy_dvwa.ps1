@@ -8,10 +8,15 @@ $subnetVM = "subnet-vm"
 $subnetAGW = "subnet-agw"
 $nsg = "dvwa-nsg"
 $agwPublicIP = "dvwa-agw-pip"
+$agwsku = "WAF_v2"
 $publicIpSku = "Standard"
 $publicIpAllocationMethod = "Static"
+$applicationGatewayName = "dvwa-agw"
 $wafPolicy = "dvwa-waf-policy"
+$workspace = "waf-logs-v1"
 $customDataFile = "dvwa-cloud-init.txt"
+$diagnostic_logs = "diagnostic_logs.json"
+$agwsku = "WAF_v2"
 
 # LOGIN
 az login
@@ -19,6 +24,11 @@ az login
 # Create resource group
 az group create --name $resourceGroup --location $location
 
+# CREATE LOG ANALYTICS WORKSPACE
+az monitor log-analytics workspace create `
+  --resource-group $resourceGroup `
+  --workspace-name $workspace `
+  --location $location
 
 # CREATE VNET AND SUBNETS
 az network vnet create `
@@ -77,6 +87,9 @@ az vm create `
   --generate-ssh-keys `
   --custom-data $customDataFile
 
+# GET VM PRIVATE IP
+$vmPrivateIP = az vm list-ip-addresses --resource-group $resourceGroup --name $vmName --query "[0].virtualMachine.network.privateIpAddresses[0]" -o tsv
+
 # CREATE WAF POLICY
 az network application-gateway waf-policy create --resource-group $resourceGroup --name $wafPolicy --location $location
 
@@ -88,7 +101,7 @@ az network public-ip create `
     --allocation-method $publicIpAllocationMethod `
     --location $location
 
-# update the network security group for the application gateway subnet
+	
 az network vnet subnet update `
   --resource-group $resourceGroup `
   --vnet-name $vnet `
@@ -98,4 +111,4 @@ az network vnet subnet update `
 # OUTPUT FINAL PUBLIC IP
 # =============================
 $agwIP = az network public-ip show --resource-group $resourceGroup --name $agwPublicIP --query "ipAddress" -o tsv
-Write-Host "DVWA is accessible at: http://$agwIP/dvwa/setup.php"
+Write-Host "DVWA will be accicible after running the agw_deploy.ps1 script at: http://$agwIP/dvwa/setup.php"
