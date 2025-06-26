@@ -29,6 +29,9 @@ This project provides scripts to deploy DVWA (Damn Vulnerable Web Application) a
 3. **Access DVWA:**
    - After deployment, follow the output instructions to access your DVWA instance.
 
+4. **Costs:**
+   - WAFv2 Applications Gateways are expensive to run as a "lab" .50 and hour.  So you can shut it down when you are not using it from the command line only "az network application-gateway stop -g "resource group name" -n "agw name"
+
 ## Notes
 
 - Ensure you are logged in to Azure CLI before running the scripts (`az login`).
